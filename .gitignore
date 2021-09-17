@@ -2,3 +2,5 @@
 /server/rust/target/
 /server/rust/Cargo.lock
 /server/rust/Cargo.toml
+/client/kotlin/build/
+/client/kotlin/app/build/
