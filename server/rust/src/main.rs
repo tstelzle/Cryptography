@@ -20,7 +20,7 @@ const ALPHABET : Alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M'
 
 
 fn get_message() -> Message {
-    let messages : Messages = io::BufReader::new(File::open("faust").unwrap()).lines().map(|l| l.unwrap().chars().collect()).collect();
+    let messages : Messages = io::BufReader::new(File::open("../faust").unwrap()).lines().map(|l| l.unwrap().chars().collect()).collect();
     let mut rng = rand::thread_rng();
     let n : usize = rng.gen::<usize>() % messages.len();
     messages[n].clone()
@@ -36,7 +36,7 @@ fn find_code(symbol : Symbol) -> Option<u8> {
 }
 
 fn encrypt_symbol(symbol : Symbol, key : &Key) -> Symbol {
-    println!("{}", symbol);
+//     println!("{}", symbol);
     let k = key.lock().unwrap();
     let code = find_code(symbol).unwrap();
     let encrypted_code = (code + *k) % N;
@@ -44,7 +44,11 @@ fn encrypt_symbol(symbol : Symbol, key : &Key) -> Symbol {
 }
 
 fn encrypt(m : &Message, key : &Key) -> Cyphertext {
-    m.iter().map(|s| encrypt_symbol(*s,key)).collect()
+    let cypher = m.iter().map(|s| encrypt_symbol(*s,key)).collect::<Vec<char>>();
+	let cypher_string = cypher.iter().cloned().collect::<String>();
+    println!("{}", cypher_string);
+
+    return cypher
 }
 
 	    

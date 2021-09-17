@@ -1,4 +1,4 @@
-/target
-Cargo.lock
-faust~
-Cargo.toml~
+.idea
+/server/rust/target/
+/server/rust/Cargo.lock
+/server/rust/Cargo.toml
